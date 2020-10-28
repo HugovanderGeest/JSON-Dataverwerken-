@@ -4,7 +4,7 @@ const xhr = new XMLHttpRequest();
 xhr.onreadystatechange = () => {
     if(xhr.readyState == 4 && xhr.status ==200) {
         let resultaat = JSON.parse(xhr.responseText);
-        boeken.data = resultaat;
+        boeken.filteren (resultaat);
         boeken.uitvoer();
     }
 }
@@ -13,6 +13,13 @@ xhr.open('GET', 'boeken.json', true);
 xhr.send();
 
 const boeken = {
+
+    taalfilter: 'Engels',
+
+    // filter op taal
+    filteren (gegevens) {
+    this.data = gegevens.filter( (bk) =>{return bk.taal == this.taalfilter} );
+},
 
     // met voortitel
     uitvoer() {
@@ -36,7 +43,7 @@ const boeken = {
 
             // html 
             html += `<section class="boek">`;
-            html += `<img src="${boek.cover}" alt="${completeTitel}">`;
+            html += `<img class="boek_cover" src="${boek.cover}" alt="${completeTitel}">`;
             html += `<h3>${completeTitel}</h3>`;
             html += `<p class="boek__auteurs">Auteur(s): ${auteurs}</p>`
             html += `<span class="boek_ean">EAN: ${boek.ean} | </span>`
