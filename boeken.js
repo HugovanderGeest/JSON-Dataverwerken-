@@ -30,6 +30,11 @@ const boeken = {
             html += `<section class="boek">`;
             html += `<img src="${boek.cover}" alt="${completeTitel}">`;
             html += `<h3>${completeTitel}</h3>`;
+            html += `<span class="boek_ean">EAN: ${boek.ean} | </span>`
+            html += `<span class="boek_uitvage">Uitgaven datum: ${boek.uitgave} | </span>`
+            html += `<span class="boek_taal">Taal: ${boek.taal} | </span>`
+            html += `<span class="boek_paginas">Aantal blatzijden: ${boek.paginas} </span>`
+            html += `<div class="boek_prijs">&euro; ${boek.prijs} </div>`
             html += `</section>`;
         });
         uitvoer.innerHTML = html

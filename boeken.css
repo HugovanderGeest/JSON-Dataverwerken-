@@ -1,0 +1,33 @@
+body {
+  background-color: lightseagreen;
+}
+
+.boek {
+  padding: 1em;
+  background-color: azure;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+  max-width: 100%;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.boek_cover {
+  float: left;
+  padding: 0 3rem 0 0;
+  max-width: 300px;
+}
+
+h3 {
+  font-size: 50px;
+  color: lightgreen;
+}
+
+.boek_prijs {
+  font-size: 30px;
+  padding: 20px;
+  margin: 10px 30% 10px 30%;
+  background-color: lightseagreen;
+  border-radius: 30px;
+  color: lightgreen;
+}
