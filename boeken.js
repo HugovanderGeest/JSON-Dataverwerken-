@@ -25,11 +25,20 @@ const boeken = {
             }
             completeTitel += boek.titel;
 
+            // auteurs
+
+            let auteurs ="";
+            boek.auteurs.forEach(schrijver => {
+                let tussenvoegsel = schrijver.tussenvoegsel ? schrijver.tussenvoegsel+" " : " ";
+                auteurs += schrijver.voornaam + " " + tussenvoegsel + " " + schrijver.achternaam  + " | ";
+            })
+
 
             // html 
             html += `<section class="boek">`;
             html += `<img src="${boek.cover}" alt="${completeTitel}">`;
             html += `<h3>${completeTitel}</h3>`;
+            html += `<p class="boek__auteurs">Auteur(s): ${auteurs}</p>`
             html += `<span class="boek_ean">EAN: ${boek.ean} | </span>`
             html += `<span class="boek_uitvage">Uitgaven datum: ${boek.uitgave} | </span>`
             html += `<span class="boek_taal">Taal: ${boek.taal} | </span>`
