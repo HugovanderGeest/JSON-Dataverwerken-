@@ -1,6 +1,8 @@
 const uitvoer = document.getElementById('boeken');
 const xhr = new XMLHttpRequest();
 
+const taalkeuzen = document.querySelectorAll('.besturing__cb-taal');
+
 xhr.onreadystatechange = () => {
     if(xhr.readyState == 4 && xhr.status ==200) {
         let resultaat = JSON.parse(xhr.responseText);
@@ -14,11 +16,18 @@ xhr.send();
 
 const boeken = {
 
-    taalfilter: 'Engels',
+    taalfilter:  [ "Duits", "Nederlands"],
 
     // filter op taal
     filteren (gegevens) {
-    this.data = gegevens.filter( (bk) =>{return bk.taal == this.taalfilter} );
+    // this.data = gegevens.filter( (bk) =>{return bk.taal == this.taalfilter} );
+    this.data = gegevens.filter( (bk) => {
+        let bool = false;
+            this.taalfilter.forEach( (taal) => {
+                if ( bk.taal == taal ) {bool = true}
+            } )
+        return bool;
+    } )
 },
 
     // met voortitel
@@ -108,4 +117,22 @@ const boeken = {
         }
         return maand;
     }
+
+    
 }
+const pasfilteraan = () => {
+    let gecheckteTaalKeuze = [];
+    taalkeuzen.forEach(cb => {
+        if (cb.cheacked) gecheckteTaalKeuze.push(cb.value);
+    })
+    boeken.taalfilter = gecheckteTaalKeuze;
+    boeken.filteren(JSON.parse(xhr.responseText));
+    boeken.uitvoer();
+}
+
+taalkeuzen.forEach( cb  => cb.addEventListener('change', pasfilteraan) );
+
+
+
+// checkboxen 
+
