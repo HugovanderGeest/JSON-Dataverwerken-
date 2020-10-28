@@ -2,6 +2,7 @@ const uitvoer = document.getElementById('boeken');
 const xhr = new XMLHttpRequest();
 
 const taalkeuzen = document.querySelectorAll('.besturing__cb-taal');
+const selectSort = document.querySelector('.besturing__select');
 
 xhr.onreadystatechange = () => {
     if(xhr.readyState == 4 && xhr.status ==200) {
@@ -16,11 +17,10 @@ xhr.send();
 
 const boeken = {
 
-    taalfilter:  [ "Duits", "Nederlands"],
-
+    taalfilter:  [ "Duits", "Nederlands", "Engels"],
+ 
     // filter op taal
     filteren (gegevens) {
-    // this.data = gegevens.filter( (bk) =>{return bk.taal == this.taalfilter} );
     this.data = gegevens.filter( (bk) => {
         let bool = false;
             this.taalfilter.forEach( (taal) => {
@@ -29,9 +29,22 @@ const boeken = {
         return bool;
     } )
 },
+        // sorteren op titel
+
+sorteren() {
+    if (this.eigenschapsorteren == 'titel' ) {     this.data.sort( (a,b) => (a.titel.toUpperCase() > b.titel.toUpperCase()) ? 1 : -1 );}
+    else if (this.eigenschapsorteren == 'paginas' ) {     this.data.sort( (a,b) => (a.paginas > b.paginas) ? 1 : -1 );}
+    else if (this.eigenschapsorteren == 'uitgave' ) {     this.data.sort( (a,b) => (a.uitgave > b.uitgave) ? 1 : -1 );}
+    else if (this.eigenschapsorteren == 'prijs' ) {     this.data.sort( (a,b) => (a.prijs > b.prijs) ? 1 : -1 );}
+    else if (this.eigenschapsorteren == 'auteurs' ) {     this.data.sort( (a,b) => (a.auteurs[0].achternaam > b.auteurs[0].achternaam) ? 1 : -1 );}
+
+},
 
     // met voortitel
-    uitvoer() {
+    uitvoer() { 
+
+        this.sorteren();
+
         let html = "";
         this.data.forEach( boek => {
 
@@ -120,6 +133,10 @@ const boeken = {
 
     
 }
+
+
+// checkboxen 
+
 const pasfilteraan = () => {
     let gecheckteTaalKeuze = [];
     taalkeuzen.forEach(cb => {
@@ -130,9 +147,13 @@ const pasfilteraan = () => {
     boeken.uitvoer();
 }
 
+const pasSortEigAan = () => {
+    boeken.eigenschapsorteren = selectSort.value;
+    boeken.uitvoer();
+}
+
 taalkeuzen.forEach( cb  => cb.addEventListener('change', pasfilteraan) );
 
+selectSort.addEventListener('chage', pasSortEigAan)
 
-
-// checkboxen 
 
