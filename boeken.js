@@ -18,7 +18,8 @@ xhr.send();
 const boeken = {
 
     taalfilter:  [ "Duits", "Nederlands", "Engels"],
- 
+    oplopend: 1, // volgorden 
+
     // filter op taal
     filteren (gegevens) {
     this.data = gegevens.filter( (bk) => {
@@ -32,11 +33,11 @@ const boeken = {
         // sorteren op titel
 
 sorteren() {
-    if (this.eigenschapsorteren == 'titel' ) {     this.data.sort( (a,b) => (a.titel.toUpperCase() > b.titel.toUpperCase()) ? 1 : -1 );}
-    else if (this.eigenschapsorteren == 'paginas' ) {     this.data.sort( (a,b) => (a.paginas > b.paginas) ? 1 : -1 );}
-    else if (this.eigenschapsorteren == 'uitgave' ) {     this.data.sort( (a,b) => (a.uitgave > b.uitgave) ? 1 : -1 );}
-    else if (this.eigenschapsorteren == 'prijs' ) {     this.data.sort( (a,b) => (a.prijs > b.prijs) ? 1 : -1 );}
-    else if (this.eigenschapsorteren == 'auteurs' ) {     this.data.sort( (a,b) => (a.auteurs[0].achternaam > b.auteurs[0].achternaam) ? 1 : -1 );}
+    if (this.eigenschapsorteren == 'titel' ) {     this.data.sort( (a,b) => (a.titel.toUpperCase() > b.titel.toUpperCase()) ? this.oplopend : -1*this.oplopend );}
+    else if (this.eigenschapsorteren == 'paginas' ) {     this.data.sort( (a,b) => (a.paginas > b.paginas) ? this.oplopend : -1*this.oplopend );}
+    else if (this.eigenschapsorteren == 'uitgave' ) {     this.data.sort( (a,b) => (a.uitgave > b.uitgave) ? this.oplopend : -1*this.oplopend );}
+    else if (this.eigenschapsorteren == 'prijs' ) {     this.data.sort( (a,b) => (a.prijs > b.prijs) ? this.oplopend : -1*this.oplopend );}
+    else if (this.eigenschapsorteren == 'auteurs' ) {     this.data.sort( (a,b) => (a.auteurs[0].achternaam > b.auteurs[0].achternaam) ? this.oplopend : -1*this.oplopend );}
 
 },
 
@@ -141,7 +142,7 @@ const pasfilteraan = () => {
     let gecheckteTaalKeuze = [];
     taalkeuzen.forEach(cb => {
         if (cb.cheacked) gecheckteTaalKeuze.push(cb.value);
-    })
+    });
     boeken.taalfilter = gecheckteTaalKeuze;
     boeken.filteren(JSON.parse(xhr.responseText));
     boeken.uitvoer();
@@ -156,4 +157,6 @@ taalkeuzen.forEach( cb  => cb.addEventListener('change', pasfilteraan) );
 
 selectSort.addEventListener('chage', pasSortEigAan)
 
+
+ 
 
