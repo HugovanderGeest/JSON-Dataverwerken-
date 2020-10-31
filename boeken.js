@@ -1,7 +1,7 @@
 const uitvoer = document.getElementById('boeken');
 const xhr = new XMLHttpRequest();
 
-const taalkeuzen = document.querySelectorAll('.besturing__cb-taal');
+const taalkeuzen = document.querySelectorAll('.besturing__cl-taal');
 const selectSort = document.querySelector('.besturing__select');
 
 xhr.onreadystatechange = () => {
@@ -61,7 +61,7 @@ sorteren() {
             boek.auteurs.forEach(schrijver => {
                 let tussenvoegsel = schrijver.tussenvoegsel ? schrijver.tussenvoegsel+" " : " ";
                 auteurs += schrijver.voornaam + " " + tussenvoegsel + " " + schrijver.achternaam  + ", " ;
-            })
+            });
 
 
             // html 
@@ -139,13 +139,18 @@ sorteren() {
 // checkboxen 
 
 const pasfilteraan = () => {
+    console.log('pasfilteraan');
     let gecheckteTaalKeuze = [];
     taalkeuzen.forEach(cb => {
-        if (cb.cheacked) gecheckteTaalKeuze.push(cb.value);
+        if (cb.checked) gecheckteTaalKeuze.push(cb.value);
+        
     });
+
+    
     boeken.taalfilter = gecheckteTaalKeuze;
     boeken.filteren(JSON.parse(xhr.responseText));
     boeken.uitvoer();
+    
 }
 
 const pasSortEigAan = () => {
@@ -155,8 +160,10 @@ const pasSortEigAan = () => {
 
 taalkeuzen.forEach( cb  => cb.addEventListener('change', pasfilteraan) );
 
-selectSort.addEventListener('chage', pasSortEigAan)
+selectSort.addEventListener('change', pasSortEigAan);
 
 
  
-
+// function test() {
+// console.log('pasfilteraan');
+// }
