@@ -19,7 +19,7 @@ const boeken = {
 
     taalfilter:  [ "Duits", "Nederlands", "Engels"],
     oplopend: 1, // volgorden 
-
+     
     // filter op taal
     filteren (gegevens) {
     this.data = gegevens.filter( (bk) => {

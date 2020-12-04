@@ -6,6 +6,7 @@ body {
   padding: 1em;
   background-color: azure;
   padding-bottom: 30px;
+  margin: 30px;
   margin-bottom: 100px;
   max-width: 100%;
   border-radius: 25px;
@@ -29,4 +30,15 @@ h3 {
   background-color: lightseagreen;
   border-radius: 30px;
   color: lightgreen;
+}
+
+@media (min-width: 1250px) {
+  #boeken {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .boek:nth-child(4n + 2),
+  .boek:nth-child(4n + 3) {
+    background-color: rgb(23, 73, 70);
+  }
 }
