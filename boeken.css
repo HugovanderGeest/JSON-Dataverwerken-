@@ -10,13 +10,14 @@ body {
 
 .ww__icon {
   height: 3em;
+  right: 30px;
+  position: fixed;
+  z-index: 3;
 }
 
 .ww__aantal {
   width: 0.5em;
   position: absolute;
-  top: -0.3em;
-  left: 2.6em;
   background-color: rgb(14, 42, 40);
   color: white;
   width: 1em;
@@ -24,6 +25,8 @@ body {
   padding: 0.2em;
   text-align: center;
   border-radius: 50%;
+  position: fixed;
+  z-index: 3;
 }
 
 .boek {
@@ -35,11 +38,13 @@ body {
   max-width: 100%;
   border-radius: 25px;
   text-align: center;
+  background-color: rgb(49, 160, 152);
 }
 
 .boek_cover {
   padding-bottom: 30px;
-  max-width: 250px;
+  max-width: 100%;
+  border-radius: 20px;
 }
 
 h3 {
@@ -51,8 +56,24 @@ h3 {
   font-size: 25px;
   padding: 20px;
   margin: 10px 30% 10px 30%;
-  background-color: lightseagreen;
+  background-color: rgb(24, 128, 122);
   border-radius: 30px;
+  transition: 0.5s;
+}
+
+.Boek__checkbox {
+  z-index: 2;
+  background-color: rgb(24, 128, 122);
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 25px 200px 25px 10px;
+  font-size: 20px;
+}
+
+.boek_prijs:hover {
+  background-color: lightseagreen;
+  transform: scale(1.1);
 }
 
 .boek__bestel-knop {
@@ -72,6 +93,19 @@ h3 {
   }
   .boek:nth-child(4n + 2),
   .boek:nth-child(4n + 3) {
-    background-color: rgb(14, 42, 40);
+    background-color: rgb(53, 172, 164);
+  }
+  .boek_cover {
+    padding-bottom: 30px;
+    max-width: 300px;
+  }
+  .Boek__checkbox {
+    z-index: 2;
+    background-color: rgb(24, 128, 122);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 25px 980px 25px 10px;
+    font-size: 20px;
   }
 }
