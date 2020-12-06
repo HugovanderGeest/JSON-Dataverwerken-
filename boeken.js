@@ -23,27 +23,50 @@ const ww = {
 boekToevoegen(obj) {
     ww.bestelling.push(obj);
     aantalInWinkelwagen.innerHTML = this.bestelling.length;
-
-},
-
-
-// data local opslaan 
-dataOpslaan(){
     localStorage.wwBestelling = JSON.stringify(this.bestelling);
 },
-
-
 
     // de data uit de local stoige halen
     dataOphalen() {
         this.bestelling = JSON.parse(localStorage.wwBestelling);
-        aantalInWinkelwagen.innerHTML = ww.bestelling.length;
-
+        this.uitvoeren();
+    },
+    
+    //uitvoer
+uitvoeren() {
+    let html = '<tabel>';
+    let totaal = 0;
+    this.bestelling.forEach(boek => {
+            
+    let completeTitel = "";
+    if(boek.voortitel) {
+        completeTitel += boek.voortitel = " ";
     }
+    completeTitel += boek.titel;
+
+        // string
+        html += '<tr>'
+        html += `<td><img src="${boek.cover}" class="bestelformulier__cover"></td>`;
+        html += `<td><h1>${completeTitel}</h1></td>`;
+        html += `<td>${boek.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'})}</td>`
+        html += '</tr>';
+        totaal += boek.prijs;
+    })
+
+    html += `<tr><td colspan"2">Totaal</td>
+    <td>${totaal.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'})}</td>
+    </tr>`;
+    html += '</tabel>';
+    document.getElementById('uitvoer').innerHTML = html; 
+    aantalInWinkelwagen.innerHTML = ww.bestelling.length;
+
+}
+
 }
 
 // de data uit de local stoige halen
 ww.dataOphalen();
+
 
 
 
