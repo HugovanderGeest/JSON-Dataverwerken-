@@ -80,8 +80,42 @@ uitvoeren() {
     document.getElementById('uitvoer').innerHTML = html; 
     aantalInWinkelwagen.innerHTML = totaalBesteld;
     this.trashActiveren();
+    this.hogerLagerActiveren();
+
 
 },
+
+hogerLagerActiveren() {
+    // verhoog knop
+    let hogerKnoppen = document.querySelectorAll('.bestelformulier__verhoog');
+    hogerKnoppen.forEach(knop => {
+        knop.addEventListener('click', e => {
+            let ophoogID = e.target.getAttribute('data-rol');
+            let opTehogenBoek = this.bestelling.filter(boek => boek.ean == ophoogID);
+            opTehogenBoek[0].besteldAantal ++;
+            localStorage.wwBestelling = JSON.stringify(this.bestelling);
+            this.uitvoeren();
+        })
+    })
+
+    //verlaagknop
+    let lagerKnoppen = document.querySelectorAll('.bestelformulier__verlaag');
+    lagerKnoppen.forEach(knop => {
+        knop.addEventListener('click', e => {
+            let verlaagID = e.target.getAttribute('data-rol');
+            let opVerlagenAantal = this.bestelling.filter(boek => boek.ean == verlaagID);
+            if (opVerlagenAantal[0].besteldAantal>1) {
+                opVerlagenAantal[0].besteldAantal --;
+            } else {
+                // verwijder boek
+                this.bestelling = this.bestelling.filter(bk => bk.ean != verlaagID);
+            }
+            localStorage.wwBestelling = JSON.stringify(this.bestelling);
+            this.uitvoeren();
+        })
+    })
+},
+
 trashActiveren() {
     document.querySelectorAll('.bestelformulier__trash').forEach( trash => {
         trash.addEventListener('click', e => {
@@ -265,7 +299,9 @@ taalkeuzen.forEach( cb  => cb.addEventListener('change', pasfilteraan) );
 selectSort.addEventListener('change', pasSortEigAan);
 
 
- 
+function uwBesteling() {
+    alert("Bedankt voor uw bestelling");
+  }
 // function test() {
 // console.log('pasfilteraan');
 // }

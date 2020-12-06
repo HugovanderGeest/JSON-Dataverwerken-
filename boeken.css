@@ -159,6 +159,7 @@ h3 {
   padding: 0 1em;
   transition: 0.2s;
   cursor: pointer;
+  font-size: 30px;
 }
 
 .bestelformulier__trash:hover, 
@@ -167,3 +168,21 @@ h3 {
   transform: scale(1.2);
 }
 
+.bestelformulier__trash {
+  color: red;
+}
+
+h1 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+
+.bestellen_knop {
+  margin-top: 30px;
+  padding: 10px;
+  font-size: 50px;
+  border: transparent 1px;
+  background-color:  rgb(24, 128, 122);
+  border-radius: 15px;
+}
