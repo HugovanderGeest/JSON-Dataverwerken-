@@ -27,10 +27,12 @@ const ww = {
 boekToevoegen(obj) { 
     let gevonden = this.bestelling.filter(b => b.ean == obj.ean );
     if ( gevonden.length == 0) {
+        obj.besteldAantal ++;
         ww.bestelling.push(obj);
+    } else {
+        gevonden[0].besteldAantal ++;
 
     }
-    aantalInWinkelwagen.innerHTML = this.bestelling.length;
     localStorage.wwBestelling = JSON.stringify(this.bestelling);
 },
 
@@ -46,6 +48,7 @@ boekToevoegen(obj) {
 uitvoeren() {
     let html = '<tabel>';
     let totaal = 0;
+    let totaalBesteld = 0;
     this.bestelling.forEach(boek => {
             
     let completeTitel = "";
@@ -58,9 +61,11 @@ uitvoeren() {
         html += '<tr>'
         html += `<td><img src="${boek.cover}" class="bestelformulier__cover"></td>`;
         html += `<td><h1>${completeTitel}</h1></td>`;
+        html += `<td><h1>${boek.besteldAantal}</h1></td>`;
         html += `<td>${boek.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'})}</td>`
         html += '</tr>';
-        totaal += boek.prijs;
+        totaal += boek.prijs*boek.besteldAantal;
+        totaalBesteld += boek.besteldAantal;
     })
 
     html += `<tr><td colspan"2">Totaal</td>
@@ -68,7 +73,7 @@ uitvoeren() {
     </tr>`;
     html += '</tabel>';
     document.getElementById('uitvoer').innerHTML = html; 
-    aantalInWinkelwagen.innerHTML = ww.bestelling.length;
+    aantalInWinkelwagen.innerHTML = totaalBesteld;
 
 }
 
@@ -79,7 +84,7 @@ ww.dataOphalen();
 
 
 
-
+// Hugo van der Geest
 const boeken = {
 
     taalfilter:  [ "Duits", "Nederlands", "Engels"],
@@ -152,7 +157,6 @@ sorteren() {
                 e.preventDefault();
                 let boekID = e.target.getAttribute('data-role');
             let geklikBoek = this.data.filter( b => b.ean == boekID);
-            geklikBoek[0].besteldAantal ++;
             ww.boekToevoegen(geklikBoek[0]);
 
             
