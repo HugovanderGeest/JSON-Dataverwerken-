@@ -63,6 +63,7 @@ uitvoeren() {
         html += `<td><h1>${completeTitel}</h1></td>`;
         html += `<td><h1>${boek.besteldAantal}</h1></td>`;
         html += `<td>${boek.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'})}</td>`
+        html += `<td><i class="fas fa-trash bestelformulier__trash" data-rol="${boek.ean}"></i></td>`;
         html += '</tr>';
         totaal += boek.prijs*boek.besteldAantal;
         totaalBesteld += boek.besteldAantal;
@@ -74,7 +75,19 @@ uitvoeren() {
     html += '</tabel>';
     document.getElementById('uitvoer').innerHTML = html; 
     aantalInWinkelwagen.innerHTML = totaalBesteld;
+    this.trashActiveren();
 
+},
+trashActiveren() {
+    document.querySelectorAll('.bestelformulier__trash').forEach( trash => {
+        trash.addEventListener('click', e => {
+            let teVerwijderenBoekID = e.target.getAttribute('data-rol');
+            this.bestelling = this.bestelling.filter(bk => bk.ean != teVerwijderenBoekID);
+            // localstorage bijwerken 
+            localStorage.wwBestelling = JSON.stringify(this.bestelling);
+            this.uitvoeren();
+        })
+    })
 }
 
 }
