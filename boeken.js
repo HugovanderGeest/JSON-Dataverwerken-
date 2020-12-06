@@ -59,12 +59,16 @@ uitvoeren() {
 
         // string
         html += '<tr>'
-        html += `<td><img src="${boek.cover}" class="bestelformulier__cover"></td>`;
         html += `<td><h1>${completeTitel}</h1></td>`;
-        html += `<td><h1>${boek.besteldAantal}</h1></td>`;
+        html += `<td><img src="${boek.cover}" class="bestelformulier__cover"></td>`;
+        html += `<td class="bestelformulier__aantal">
+        <i class="fas fa-arrow-down bestelformulier__verlaag " data-rol="${boek.ean}"></i>
+        ${boek.besteldAantal}
+        <i class="fas fa-arrow-up bestelformulier__verhoog "data-rol="${boek.ean}"></i>
+        </td>`;
         html += `<td>${boek.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'})}</td>`
         html += `<td><i class="fas fa-trash bestelformulier__trash" data-rol="${boek.ean}"></i></td>`;
-        html += '</tr>';
+        html += '</tr><br><br><br><br>';
         totaal += boek.prijs*boek.besteldAantal;
         totaalBesteld += boek.besteldAantal;
     })

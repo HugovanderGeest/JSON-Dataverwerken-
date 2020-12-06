@@ -126,8 +126,7 @@ h3 {
 }
 
 #haalFormulier {
-  display: none;
-
+  opacity: 0;
 }
 
 #haalFormulier:checked ~ .bestelformulier {
@@ -152,5 +151,19 @@ h3 {
 
 .bestelformulier__cover {
   height: 10em;
+}
+
+.bestelformulier__trash, 
+.bestelformulier__verlaag, 
+.bestelformulier__verhoog {
+  padding: 0 1em;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.bestelformulier__trash:hover, 
+.bestelformulier__verlaag:hover, 
+.bestelformulier__verhoog:hover {
+  transform: scale(1.2);
 }
 
