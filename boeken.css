@@ -1,12 +1,14 @@
 body {
   background-color: rgb(22, 126, 121);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .ww {
   position: absolute;
   right: 4em;
   top: 2em;
+  cursor: pointer;
 }
 
 .ww__icon:hover {
@@ -15,12 +17,13 @@ body {
 
 .ww__icon {
   height: 3em;
-  right: 30px;
-  position: fixed;
+  right: 30px;  
   z-index: 3;
   transition: 0.3s;
-  right: 4em;
-  top: 2em;
+  right: 0em;
+  top: 0em;
+z-index: 6;
+position: absolute;
 }
 
 .ww__aantal {
@@ -33,8 +36,8 @@ body {
   padding: 0.2em;
   text-align: center;
   border-radius: 50%;
-  position: fixed;
-  z-index: 3;
+  z-index: 6;
+  position: absolute;
 }
 
 .boek {
@@ -76,6 +79,7 @@ h3 {
   left: 0;
   top: 0;
   padding: 25px 200px 25px 10px;
+  width: 100vw;
   font-size: 20px;
 }
 
@@ -97,6 +101,7 @@ h3 {
 @media (min-width: 1250px) {
   #boeken {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
   }
   .boek:nth-child(4n + 2),
@@ -113,6 +118,7 @@ h3 {
     position: fixed;
     left: 0;
     top: 0;
+    width: 100vw;
     padding: 25px 980px 25px 10px;
     font-size: 20px;
   }
@@ -130,7 +136,7 @@ h3 {
 
 .bestelformulier {
   background-color: lightgreen;
-  position: absolute;
+  position: absolute ;
   width: 100vw;
   min-height: 100vh;
   top: 0em;

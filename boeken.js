@@ -18,7 +18,11 @@ xhr.send();
 
 
 const ww = {
-    bestelling: []
+    bestelling: [],
+    dataOphalen() {
+        this.bestelling = JSON.parse(localStorage.wwBestelling);
+        aantalInWinkelwagen.innerHTML = ww.bestelling.length;
+    }
 } 
 ww.bestelling = JSON.parse(localStorage.wwBestelling);
 aantalInWinkelwagen.innerHTML = ww.bestelling.length;
