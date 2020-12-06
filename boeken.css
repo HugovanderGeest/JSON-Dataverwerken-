@@ -5,7 +5,12 @@ body {
 
 .ww {
   position: absolute;
-  right: 2em;
+  right: 4em;
+  top: 2em;
+}
+
+.ww__icon:hover {
+  transform: scale(1.2);
 }
 
 .ww__icon {
@@ -13,6 +18,9 @@ body {
   right: 30px;
   position: fixed;
   z-index: 3;
+  transition: 0.3s;
+  right: 4em;
+  top: 2em;
 }
 
 .ww__aantal {
@@ -108,4 +116,28 @@ h3 {
     padding: 25px 980px 25px 10px;
     font-size: 20px;
   }
+}
+
+#haalFormulier {
+  display: none;
+
+}
+
+#haalFormulier:checked ~ .bestelformulier {
+  transform: translateX(0vw);
+
+}
+
+.bestelformulier {
+  background-color: lightgreen;
+  position: absolute;
+  width: 100vw;
+  min-height: 100vh;
+  top: 0em;
+  border-radius: 2em;
+  z-index: 3;
+  padding: 2em;
+  box-sizing: border-box;
+  transform: translateX(100vw);
+  transition: transform 1s ease-in-out;
 }
