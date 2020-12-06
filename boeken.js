@@ -17,11 +17,19 @@ xhr.open('GET', 'boeken.json', true);
 xhr.send();
 
 
+function AutoRefresh( t ) {
+   setTimeout("location.reload(true);", t);
+}
+
 const ww = {
     bestelling: [], 
 // boek toevoge
-boekToevoegen(obj) {
-    ww.bestelling.push(obj);
+boekToevoegen(obj) { 
+    let gevonden = this.bestelling.filter(b => b.ean == obj.ean );
+    if ( gevonden.length == 0) {
+        ww.bestelling.push(obj);
+
+    }
     aantalInWinkelwagen.innerHTML = this.bestelling.length;
     localStorage.wwBestelling = JSON.stringify(this.bestelling);
 },
@@ -106,6 +114,9 @@ sorteren() {
         let html = "";
         this.data.forEach( boek => {
 
+            // aantal besteld
+            boek.besteldAantal = 0;
+
             let completeTitel = "";
             if(boek.voortitel) {
                 completeTitel += boek.voortitel = " ";
@@ -140,7 +151,8 @@ sorteren() {
             knop.addEventListener('click', e => {
                 e.preventDefault();
                 let boekID = e.target.getAttribute('data-role');
-            let geklikBoek = this.data.filter( b => b.ean == boekID)
+            let geklikBoek = this.data.filter( b => b.ean == boekID);
+            geklikBoek[0].besteldAantal ++;
             ww.boekToevoegen(geklikBoek[0]);
 
             
