@@ -16,11 +16,6 @@ xhr.onreadystatechange = () => {
 xhr.open('GET', 'boeken.json', true);
 xhr.send();
 
-
-function AutoRefresh( t ) {
-   setTimeout("location.reload(true);", t);
-}
-
 const ww = {
     bestelling: [], 
 // boek toevoge
@@ -40,8 +35,8 @@ boekToevoegen(obj) {
     dataOphalen() {
         if (localStorage.wwBestelling) {
             this.bestelling = JSON.parse(localStorage.wwBestelling);
+            this.uitvoeren();
         }
-        this.uitvoeren();
     },
     
     //uitvoer
