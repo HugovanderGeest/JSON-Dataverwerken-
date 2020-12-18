@@ -29,13 +29,14 @@ boekToevoegen(obj) {
 
     }
     localStorage.wwBestelling = JSON.stringify(this.bestelling);
+    ww.dataOphalen();
 },
 
     // de data uit de local stoige halen
     dataOphalen() {
         if (localStorage.wwBestelling) {
             this.bestelling = JSON.parse(localStorage.wwBestelling);
-            this.uitvoeren();
+            ww.uitvoeren();
         }
     },
     
